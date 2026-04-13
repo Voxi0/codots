@@ -1,4 +1,3 @@
-# modules/desktop/fonts.nix
 { config, pkgs, ... }:
 
 {
@@ -9,7 +8,9 @@
     fira-code
     fira-code-symbols
     jetbrains-mono
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
   ];
 
   fonts.fontconfig.defaultFonts = {
