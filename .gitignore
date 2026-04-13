@@ -1,0 +1,9 @@
+result
+result-*
+.direnv/
+.pre-commit-config.yaml
+*.qcow2
+node_modules/
+site/
+*.log
+.DS_Store
