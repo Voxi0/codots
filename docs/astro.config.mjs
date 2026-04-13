@@ -22,7 +22,10 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: "Getting Started",
-					autogenerate: { directory: "getting-started" },
+					items: [
+						"getting-started/installation",
+						"getting-started/post-installation"
+					],
 					collapsed: false,
 				},
 			],
