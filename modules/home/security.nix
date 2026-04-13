@@ -9,7 +9,7 @@
     wireshark            # packet analyzer
     netcat-openbsd       # nc (networking utility)
     net-snmp             # snmp tools
-    telnet               # telnet client
+    inetutils               # telnet client
 
     # Password / Cracking
     john                 # john the ripper

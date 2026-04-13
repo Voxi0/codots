@@ -19,8 +19,7 @@
     # 3D Printing
     bambu-studio         # bambu lab slicer
 
-    # Streaming / IPTV
-    iptvnator            # IPTV player
+
 
     # Utilities
     flameshot            # screenshots
