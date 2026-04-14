@@ -1,4 +1,4 @@
-.PHONY: switch update clean check fmt
+.PHONY: switch update clean check
 
 # Rebuild and switch to the new config
 switch:
@@ -15,7 +15,3 @@ clean:
 # Check the flake for errors without building
 check:
 	nix flake check
-
-# Format nix files (requires nixfmt in your path)
-fmt:
-	find . -name '*.nix' -exec nixfmt {} +

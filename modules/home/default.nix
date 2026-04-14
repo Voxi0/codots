@@ -1,8 +1,10 @@
 # modules/home/default.nix
 # Home-manager entry point. One import per app/concern.
-{ config, pkgs, ... }:
-
 {
+  pkgs,
+  username,
+  ...
+}: {
   imports = [
     ./shell.nix
     ./git.nix
@@ -14,28 +16,35 @@
     ./security.nix
   ];
 
-  home.stateVersion = "24.11";
+  home = {
+    # Username and user home directory
+    inherit username;
+    homeDirectory = "/home/${username}";
 
-  # CLI essentials
-  home.packages = with pkgs; [
-    htop
-    btop
-    ripgrep
-    fd
-    bat
-    eza
-    fzf
-    jq
-    unzip
-    p7zip
-    fastfetch
-    tree
-    file
-    binwalk
-    xorriso             # ISO manipulation
-    mtools              # FAT filesystem tools
-    ntfs3g              # NTFS support
-    usbutils
-    pciutils
-  ];
+    # CLI essentials
+    packages = with pkgs; [
+      htop
+      btop
+      ripgrep
+      fd
+      bat
+      eza
+      fzf
+      jq
+      unzip
+      p7zip
+      fastfetch
+      tree
+      file
+      binwalk
+      xorriso # ISO manipulation
+      mtools # FAT filesystem tools
+      ntfs3g # NTFS support
+      usbutils
+      pciutils
+    ];
+
+    # Unnecessary to change
+    stateVersion = "25.11";
+  };
 }

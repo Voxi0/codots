@@ -10,25 +10,35 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
-  let
+  outputs = inputs: let
     system = "x86_64-linux";
+    pkgs = import inputs.nixpkgs {
+      inherit system;
+    };
 
     # ── Change these to match your setup ──
     username = "user";
     hostname = "nixos";
-  in
-  {
-    nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+  in {
+    # Useful for developing codots
+    formatter.${system} = pkgs.alejandra;
+    devShells.${system}.default = pkgs.mkShellNoCC {
+      nativeBuildInputs = with pkgs; [deadnix statix];
+    };
+
+    nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit username hostname; };
+      specialArgs = {inherit username hostname;};
       modules = [
         ./hosts/default/configuration.nix
-        home-manager.nixosModules.home-manager
+        inputs.home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${username} = import ./modules/home;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${username} = import ./modules/home;
+            extraSpecialArgs = {inherit username;};
+          };
         }
       ];
     };
