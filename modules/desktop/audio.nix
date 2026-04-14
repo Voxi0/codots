@@ -1,7 +1,4 @@
-# modules/desktop/audio.nix
-{ config, pkgs, ... }:
-
-{
+_: {
   # Pipewire
   security.rtkit.enable = true;
   services.pipewire = {

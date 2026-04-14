@@ -1,18 +1,21 @@
-# modules/desktop/display.nix
-{ config, pkgs, ... }:
-
-{
+_: {
   # Pick one. Uncomment the block you want.
 
   # ── KDE Plasma (you had this on Zorin) ──
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services = {
+    xserver.enable = true;
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+  };
 
   # ── GNOME ──
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  # services = {
+  #   xserver.enable = true;
+  #   xserver = {
+  #     displayManager.gdm.enable = true;
+  #     desktopManager.gnome.enable = true;
+  #   };
+  # };
 
   # ── Hyprland (wayland tiling) ──
   # programs.hyprland.enable = true;

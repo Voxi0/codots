@@ -1,22 +1,20 @@
 # modules/home/git.nix
-{ config, pkgs, ... }:
-
-{
+_: {
   programs.git = {
     enable = true;
-    userName = "Your Name";          # change this
-    userEmail = "your@email.here";   # change this
-    extraConfig = {
+    settings = {
+      user.name = "Your Name"; # change this
+      user.email = "your@email.here"; # change this
       init.defaultBranch = "main";
       pull.rebase = true;
       core.editor = "micro";
-    };
-    aliases = {
-      st = "status -sb";
-      co = "checkout";
-      br = "branch";
-      cm = "commit -m";
-      lg = "log --oneline --graph --decorate";
+      aliases = {
+        st = "status -sb";
+        co = "checkout";
+        br = "branch";
+        cm = "commit -m";
+        lg = "log --oneline --graph --decorate";
+      };
     };
   };
 }

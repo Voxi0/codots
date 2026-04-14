@@ -1,21 +1,31 @@
-# hosts/default/configuration.nix
 # Main system configuration. Keep this thin, delegate to modules.
-{ config, pkgs, username, hostname, ... }:
-
 {
+  pkgs,
+  username,
+  hostname,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/desktop
     # ../../modules/server  # uncomment for server setups
   ];
 
+  # Nix settings
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nixpkgs.config.allowUnfree = true;
+
   # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   # Networking
-  networking.hostName = hostname;
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = hostname;
+    networkmanager.enable = true;
+  };
 
   # Locale (change to yours)
   time.timeZone = "Europe/Madrid";
@@ -24,17 +34,16 @@
   # User account
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" "libvirtd" ];
+    extraGroups = ["wheel" "networkmanager" "video" "audio" "docker" "libvirtd"];
     shell = pkgs.bash;
   };
 
-  # Nix settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # Virtualisation
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;  # qemu/kvm
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true; # qemu/kvm
+    virtualbox.host.enable = true;
+  };
 
   # Antivirus
   services.clamav = {
@@ -56,8 +65,5 @@
     mokutil
   ];
 
-  # Allow unfree packages (steam, discord, chrome, vscode, etc.)
-  nixpkgs.config.allowUnfree = true;
-
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 }

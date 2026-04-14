@@ -1,15 +1,13 @@
 # modules/home/media.nix
 # Media players, editors, creative tools
-{ config, pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     vlc
-    mpv                 # lightweight alternative to vlc
-    ffmpeg              # video/audio encoder/decoder
+    mpv # lightweight alternative to vlc
+    ffmpeg # video/audio encoder/decoder
     inkscape
     libreoffice-fresh
-    qbittorrent         # torrent client
-    kicad               # PCB / electronics design
+    qbittorrent # torrent client
+    kicad # PCB / electronics design
   ];
 }

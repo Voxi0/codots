@@ -1,7 +1,4 @@
-# modules/server/ssh.nix
-{ config, pkgs, ... }:
-
-{
+_: {
   services.openssh = {
     enable = true;
     settings = {

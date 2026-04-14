@@ -1,8 +1,5 @@
-# modules/desktop/default.nix
 # Desktop-specific config. Import individual modules here.
-{ config, pkgs, ... }:
-
-{
+_: {
   imports = [
     ./display.nix
     ./audio.nix

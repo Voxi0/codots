@@ -1,12 +1,13 @@
 # modules/home/terminal.nix
-{ config, pkgs, ... }:
-
-{
+_: {
   programs.alacritty = {
     enable = true;
     settings = {
       window = {
-        padding = { x = 8; y = 8; };
+        padding = {
+          x = 8;
+          y = 8;
+        };
         opacity = 0.95;
       };
       font = {

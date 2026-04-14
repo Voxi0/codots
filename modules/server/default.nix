@@ -1,8 +1,5 @@
-# modules/server/default.nix
 # Server-specific config. Import what you need.
-{ config, pkgs, ... }:
-
-{
+_: {
   imports = [
     ./ssh.nix
     # ./docker.nix
